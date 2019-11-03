@@ -4,17 +4,24 @@ class Node:
         self.next = None
 
 class Linkedlist:
+    # initialize the head to None
     def __init__(self):
         self.head = None
 
+#insertion
+
+    # to insert the first node
     def insert(self,NewNode):
         if self.head  == None:
             self.head = NewNode
+
+    # to insert at the beg
     def push(self,Newnode):
         node = Newnode
         node.next = self.head
         self.head = node
 
+    # insert anywhere in between the nodes
     def insert_after(self,pre_node,newNode):
         if pre_node == None:
             print("the node should be in linked list")
@@ -22,7 +29,7 @@ class Linkedlist:
         node = newNode
         node.next = pre_node.next
         pre_node.next = node
-
+    # add at the end of the list
     def append(self,newnode):
         node = newnode
         temp = self.head
@@ -33,25 +40,60 @@ class Linkedlist:
 
 # deletion
 
-    def del_front(self,delNode):
+    # del the given node with help of the values
+    def keys(self,key):
         temp = self.head
-        self.head = temp.next
 
-    def betweeen(self,delNode):
-        # if delNode.next == None:
-        pass
-            
-        
-     def end(self,delnode):
-         pass
-        
+        #if key is first node
+        if temp != None:
+            if (temp.data==key):
+                self.head = temp.next
+                temp = None
+                return
 
-#printing of the node
+        # if key is present at any other location
+        while (temp is not None):
+            if temp.data == key:
+                break
+            prev = temp  #saving the previous node
+            temp = temp.next
+
+        prev.next = temp.next
+
+        temp =None
+
+    # del the node bt position
+    def position (self,position):
+        temp = self.head
+        if position == 0:
+            self.head = temp.next
+            temp.next = None
+
+        for i in range (position -1):
+            temp = temp.next
+            if temp.next == None:
+                return
+        
+        if temp == None:
+            return
+
+        if temp.next == None:
+            return
+
+        next = temp.next.next
+
+        temp.next = None
+
+        temp.next = next
+
+#printing of the Linked List
     def print_node(self):
        temp = self.head
        while (temp):
            print(temp.data)
            temp = temp.next
+
+
 
 node1 = Node(4)
 node2 = Node(5)
@@ -68,5 +110,6 @@ link.insert_after(node2,node4)
 link.insert_after(node2,node8)
 link.append(node5)
 link.append(node6)
-link.del_front(node1)
+link.position(3)
+link.keys(7)
 link.print_node()
