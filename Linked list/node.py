@@ -86,6 +86,24 @@ class Linkedlist:
 
         temp.next = next
 
+# searching of element based on key
+    def search(self,key):
+        temp = self.head
+        count=1
+
+        while temp is not None:
+            if temp.data == key:
+                print(" {} is prsend at location {} ".format(key,count))
+                return
+            temp = temp.next
+            count = count+1
+            
+            
+
+        print("the given element is ot present in the list")
+        
+
+
 #printing of the Linked List
     def print_node(self):
        temp = self.head
@@ -113,3 +131,5 @@ link.append(node6)
 link.position(3)
 link.keys(7)
 link.print_node()
+link.search(12)
+
