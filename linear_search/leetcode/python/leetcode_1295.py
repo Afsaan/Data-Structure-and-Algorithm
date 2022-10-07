@@ -17,5 +17,5 @@ def check_digits(num):
         return True
     return False
 
-nums = [12,345,0,6,-7896]
+nums = [12,345,0,6,7896]
 print(even_digit(nums))
