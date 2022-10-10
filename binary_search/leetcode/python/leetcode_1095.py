@@ -12,47 +12,43 @@ def peak_mountain(arr):
     return start_point
 
 
-def search_left(arr, peak_point, target):
-    
-    start_point = 0
-    end_point = peak_point;
+def order(array,start_point,end_point):
+    if array[start_point] > array[end_point]:
+        return True
+    return False
+
+
+def order_agnostic(array, target , start_point , end_point):
+
+    is_asc = order(array,start_point,end_point)
 
     while(start_point<=end_point):
-        middle_point = (start_point + end_point) // 2
+        middle = (start_point + end_point) // 2
 
-        if arr[middle_point] > target:
-            end_point = middle_point-1
-        elif arr[middle_point] < target:
-            start_point = middle_point+1
+        if array[middle] == target:
+            return middle
+
+        if is_asc:
+            if array[middle] > target:
+                end_point = middle - 1
+            else:
+                start_point = middle + 1
         else:
-            return middle_point
-    
+            if array[middle] < target:
+                end_point = middle - 1
+            else:
+                start_point = middle + 1
+
     return -1
 
-def search_right(arr, peak_point, target):
-    
-    start_point = 0
-    end_point = peak_point;
 
-    while(start_point<=end_point):
-        middle_point = (start_point + end_point) // 2
+arr = [1,2,4,5,3,1]
+target=3
+point = peak_mountain(arr)
+print(point)
 
-        if arr[middle_point] < target:
-            end_point = middle_point-1
-        elif arr[middle_point] > target:
-            start_point = middle_point+1
-        else:
-            return middle_point
-    
-    return -1 
-
-
-arr = [1,2,3,4,5,3,1]
-target=5
-start_point = peak_mountain(arr)
-
-result = search_left(arr,start_point,target)
+result = order_agnostic(arr, target, start_point = 0, end_point = point)
 if result == -1:
-    result = search_right(arr,start_point,target)
+    result = order_agnostic(arr, target, start_point=point, end_point=len(arr)-1)
 
 print(result)
